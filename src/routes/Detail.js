@@ -1,7 +1,8 @@
-import { object } from "prop-types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import DetailMovie from "../components/DetailMovie";
+import styles from "./Home.module.css";
+import loadingGif from "../img/Infinity-2.6s-321px.gif";
 
 function Detail() {
   const [detail, setDetail] = useState([]);
@@ -18,8 +19,12 @@ function Detail() {
     getMovie();
   }, [])
   return (
-    <div>
-      {loading ? <h1>Loading...</h1> :
+    <div className={styles.container}>
+      {loading ? (
+        <div className={styles.loader}>
+          <img src={loadingGif} />
+        </div>
+      ) : (
         <div> {
           <DetailMovie
             key={detail.id}
@@ -32,7 +37,7 @@ function Detail() {
             genres={detail.genres} />
         }
         </div>
-      }
+      )}
     </div >
   )
 }
